@@ -65,10 +65,10 @@ class _PageRumahSakitState extends State<PageRumahSakit> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.pink, // Ubah warna background AppBar menjadi pink
+        backgroundColor: Colors.pink,
         title: Text(
           'List Rumah Sakit',
-          style: TextStyle(color: Colors.white), // Ubah warna teks judul AppBar menjadi putih
+          style: TextStyle(color: Colors.white),
         ),
       ),
       body: isLoading
@@ -105,7 +105,7 @@ class _PageRumahSakitState extends State<PageRumahSakit> {
                       title: Text(
                         rumahSakit.namaRs,
                         style: TextStyle(
-                          color: Colors.green, // Ubah warna teks nama rumah sakit menjadi putih
+                          color: Colors.green,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
@@ -115,15 +115,15 @@ class _PageRumahSakitState extends State<PageRumahSakit> {
                         children: [
                           Text(
                             'Alamat: ${rumahSakit.alamat ?? 'N/A'}',
-                            style: TextStyle(color: Colors.pink), // Ubah warna teks alamat menjadi putih
+                            style: TextStyle(color: Colors.pink),
                           ),
                           Text(
                             'Deskripsi: ${rumahSakit.deskripsi ?? 'N/A'}',
-                            style: TextStyle(color: Colors.pink), // Ubah warna teks deskripsi menjadi putih
+                            style: TextStyle(color: Colors.pink),
                           ),
                           Text(
                             'No Telp: ${rumahSakit.noTelp ?? 'N/A'}',
-                            style: TextStyle(color: Colors.pink), // Ubah warna teks nomor telepon menjadi putih
+                            style: TextStyle(color: Colors.pink),
                           ),
                         ],
                       ),
@@ -131,10 +131,7 @@ class _PageRumahSakitState extends State<PageRumahSakit> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PageDetailRS(rumahSakit: rumahSakit
-                              // idRs: rumahSakit.id,
-                              // namaRs: rumahSakit.namaRumahSakit,
-                            ),
+                            builder: (context) => PageDetailRS(rumahSakit: filteredRumahSakit[index]),
                           ),
                         );
                       },

@@ -70,10 +70,10 @@ class _PageBerandaState extends State<PageBeranda> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.pink, // Ubah warna background AppBar menjadi pink
+        backgroundColor: Colors.pink,
         title: Text(
           'Aplikasi Rumah Sakit | List Provinsi',
-          style: TextStyle(color: Colors.white), // Ubah warna teks judul AppBar menjadi putih
+          style: TextStyle(color: Colors.white),
         ),
       ),
       body: isLoading

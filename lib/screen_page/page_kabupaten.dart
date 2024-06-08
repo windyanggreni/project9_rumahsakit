@@ -72,10 +72,10 @@ class _PageKabupatenState extends State<PageKabupaten> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.pink, // Ubah warna background AppBar menjadi pink
+        backgroundColor: Colors.pink,
         title: Text(
           'List Kabupaten',
-          style: TextStyle(color: Colors.white), // Ubah warna teks judul AppBar menjadi putih
+          style: TextStyle(color: Colors.white),
         ),
       ),
       body: isLoading
@@ -112,7 +112,7 @@ class _PageKabupatenState extends State<PageKabupaten> {
                       title: Text(
                         filteredKabupaten[index].namaKabupaten,
                         style: TextStyle(
-                          color: Colors.pink, // Ubah warna teks kabupaten menjadi putih
+                          color: Colors.pink,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),

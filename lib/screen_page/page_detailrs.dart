@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
-
 import '../model/model_kamar.dart' as kamarModel;
 import '../model/model_rs.dart' as rsModel;
 
@@ -22,23 +21,23 @@ class _PageDetailRSState extends State<PageDetailRS> {
   @override
   void initState() {
     super.initState();
-    fetchKamarData();
+    fetchKamarData(widget.rumahSakit.id);
   }
 
-  Future<void> fetchKamarData() async {
+  Future<void> fetchKamarData(String rumahSakitId) async {
     setState(() {
       isLoading = true;
     });
 
     try {
-      final response = await http.get(Uri.parse('http://192.168.43.124/rumahsakitDB/getKamar.php?id_rs=${widget.rumahSakit.id}'));
+      final response = await http.get(Uri.parse('http://192.168.43.124/rumahsakitDB/getKamar.php?id_rs=$rumahSakitId'));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         print('Data kamar diterima: $data'); // Debug print
 
         setState(() {
           kamarModel.ModelKamar modelKamar = kamarModel.ModelKamar.fromJson(data);
-          listKamar = modelKamar.data;
+          listKamar = modelKamar.data.where((kamar) => kamar.rumahsakitId == rumahSakitId).toList();
           isLoading = false;
         });
       } else {
@@ -60,9 +59,9 @@ class _PageDetailRSState extends State<PageDetailRS> {
       appBar: AppBar(
         title: Text(
           widget.rumahSakit.namaRs,
-          style: TextStyle(color: Colors.white), // Ubah warna teks judul AppBar menjadi putih
+          style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.pink, // Ubah warna background AppBar menjadi pink
+        backgroundColor: Colors.pink,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -97,26 +96,26 @@ class _PageDetailRSState extends State<PageDetailRS> {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.pink, // Ubah warna teks nama rumah sakit menjadi pink
+                      color: Colors.pink,
                     ),
                   ),
                   SizedBox(height: 8),
                   Text(
                     'Alamat: ${widget.rumahSakit.alamat ?? 'N/A'}',
                     style: TextStyle(
-                      color: Colors.black87, // Ubah warna teks alamat menjadi hitam
+                      color: Colors.black87,
                     ),
                   ),
                   Text(
                     'Deskripsi: ${widget.rumahSakit.deskripsi ?? 'N/A'}',
                     style: TextStyle(
-                      color: Colors.black87, // Ubah warna teks deskripsi menjadi hitam
+                      color: Colors.black87,
                     ),
                   ),
                   Text(
                     'No Telp: ${widget.rumahSakit.noTelp ?? 'N/A'}',
                     style: TextStyle(
-                      color: Colors.black87, // Ubah warna teks nomor telepon menjadi hitam
+                      color: Colors.black87,
                     ),
                   ),
                   SizedBox(height: 16),
@@ -136,11 +135,11 @@ class _PageDetailRSState extends State<PageDetailRS> {
                           ),
                           elevation: 5,
                           child: ListTile(
-                            leading: Icon(Icons.hotel, size: 40, color: Colors.pink), // Ubah warna ikon kamar menjadi pink
+                            leading: Icon(Icons.hotel, size: 40, color: Colors.pink),
                             title: Text(
                               kamar.namaKamar,
                               style: TextStyle(
-                                color: Colors.pink, // Ubah warna teks nama kamar menjadi pink
+                                color: Colors.pink,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                               ),
@@ -151,19 +150,19 @@ class _PageDetailRSState extends State<PageDetailRS> {
                                 Text(
                                   'Kamar Tersedia: ${int.tryParse(kamar.kamarTersedia) ?? 0}',
                                   style: TextStyle(
-                                    color: Colors.black87, // Ubah warna teks kamar tersedia menjadi hitam
+                                    color: Colors.black87,
                                   ),
                                 ),
                                 Text(
                                   'Kamar Kosong: ${int.tryParse(kamar.kamarKosong) ?? 0}',
                                   style: TextStyle(
-                                    color: Colors.black87, // Ubah warna teks kamar kosong menjadi hitam
+                                    color: Colors.black87,
                                   ),
                                 ),
                                 Text(
                                   'Jumlah Antrian: ${int.tryParse(kamar.jumlahAntrian) ?? 0}',
                                   style: TextStyle(
-                                    color: Colors.black87, // Ubah warna teks jumlah antrian menjadi hitam
+                                    color: Colors.black87,
                                   ),
                                 ),
                               ],
